@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class DashBoardController extends Controller
+class ClientesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,12 +13,10 @@ class DashBoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
-            $usuarios = auth()->user()->idrol;
-
-
-           return  view('dashboard\index',compact('usuarios'));
+          $sql = 'SELECT * FROM clientes';
+        $clientes  = DB::select($sql);
+       return  view('clientes\index', compact('clientes'));
     }
 
     /**

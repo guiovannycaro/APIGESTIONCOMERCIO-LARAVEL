@@ -58,7 +58,7 @@
                                       <a href="{{ route('registro.index') }}" class="text-body"><b> Register</b></a>
                                   </label>
                               </div>
-                              <a href="#" class="text-body"><b>Forgot password?</b></a>
+                              <a href="{{ route('recordar.index') }}" class="text-body"><b>Forgot password?</b></a>
                           </div>
 
                           <div class="text-center text-lg-start mt-4 pt-2">

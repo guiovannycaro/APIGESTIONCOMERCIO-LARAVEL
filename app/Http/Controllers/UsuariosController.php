@@ -13,10 +13,17 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+public function __construct()
+{
+        $this->middleware('auth');
+}
+
     public function index()
     {
-         $sql = 'SELECT * FROM usuarios';
+         $sql = 'SELECT * FROM users';
         $usuarios  = DB::select($sql);
+
        return  view('usuarios\index', compact('usuarios'));
     }
 

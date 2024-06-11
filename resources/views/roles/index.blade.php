@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Usuarios</h1>
+    <h1>Roles</h1>
 
 
 
@@ -19,25 +19,17 @@
         <thead class="thead-dark">
             <th scope="col">ID</th>
             <th scope="col">Nombres</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Num Documento</th>
-            <th scope="col">Tipo Documento</th>
-            <th scope="col">Rol</th>
+            <th scope="col">Descripcion</th>
             <th scope="col">Estado</th>
             <th scope="col">Accion</th>
         </thead>
         <tbody>
-            @foreach ($usuarios as $usu)
+            @foreach ($roles as $usu)
                 <tr class="table-active">
                     <td>{{ $usu->id }}</td>
-                    <td> {{ $usu->name }}</td>
-                    <td> {{ $usu->email }}</td>
-                    <td>{{ $usu->usu_telefono }}</td>
-                    <td>{{ $usu->usu_numdocumento }}</td>
-                    <td>{{ $usu->usu_tdoc_id }}</td>
-                    <td> {{ $usu->idrol }}</td>
-                    <td>{{ $usu->usu_estado }}</td>
+                    <td> {{ $usu->CLI_NOMBRES }}</td>
+                    <td> {{ $usu->CLI_descripcion }}</td>
+                    <td>{{ $usu->CLI_estado }}</td>
                     <td> <a hfet="" class="btn btn-info">editar</a> - <a h ref=""
                             class="btn btn-danger">eliminar</a></td>
                 </tr>
