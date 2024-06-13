@@ -55,7 +55,7 @@
                               <div class="form-check mb-0">
 
                                   <label class="form-check-label" for="form2Example3">
-                                      <a href="{{ route('registro.index') }}" class="text-body"><b> Register</b></a>
+                                      <a href="{{ route('register.index') }}" class="text-body"><b> Register</b></a>
                                   </label>
                               </div>
                               <a href="{{ route('recordar.index') }}" class="text-body"><b>Forgot password?</b></a>

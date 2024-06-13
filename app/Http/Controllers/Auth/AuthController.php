@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mail;
-use Hash;
+use Illuminate\Support\Facades\Hash;
+use Exception;
 use Carbon\Carbon;
-use DB;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     /**
@@ -23,6 +24,8 @@ class AuthController extends Controller
       public function register()
     {
         return view('auth.register');
+
+
     }
 
 
@@ -33,22 +36,25 @@ class AuthController extends Controller
         $request->validate([
            'email'=> 'required|unique:users,email',
            'password'=> 'required|min:4',
-           'password_confirmation'=> 'required|same:password'
+           'password_conf'=> 'required|same:password'
         ],[
             'email.required'=> 'el email es requerido',
             'email.unique'=> 'el email ya se ha usado'
         ]);
-
+        $rol = '2';
       $inserted =   User::create([
                        'name'=>$request->name,
                        'email'=>$request->email,
                        'password'=> bcrypt($request->password),
-                       'idrol'=>$request->idrol
+                       'idrol'=>$rol
                       ]);
 
         if ($inserted) {
+
             return redirect()->route('authe')->with('success', 'usuario registrado correctamente');
+
         } else {
+              dd($inserted);
             return redirect()->route('registro.index')->with('error', 'usuario no registrado correctamente');
         }
     }
@@ -62,13 +68,31 @@ class AuthController extends Controller
     public function regupdate(Request $request)
     {
 
-         $request->validate([
-           'email'=> 'required|unique:users,email'
-        ],[
-            'email.required'=> 'el email es requerido'
+
+  $request->validate([
+           'email'=> 'required|email',
+           'password'=> 'required|min:8',
+           'confpassword'=> 'required|same:password'
         ]);
 
-        $token = Str::random(64);
+
+
+
+
+  $token = Str::random(68);
+        $correo=  $request->email;
+        $passwordconf =  $request->confpassword;
+        $password = Hash::make($request->password);
+
+        if($request->password == $passwordconf){
+           $sql = "update users set password ='.$password.' where email= '.$correo.'";
+           User::where('email', $request->email)->update(['password' =>  bcrypt($request->password)]);
+            return redirect()->route('authe')->with('success', 'se ha cambiado la contraseña con exito');
+        }
+
+
+    return redirect()->route('recordar.index')->with('unsuccess', 'no se ha cambiado la contraseña con exito');
+
 
 
     }

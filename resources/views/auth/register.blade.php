@@ -1,108 +1,91 @@
-  @extends('layouts.login')
-  <h1>register</h1>
-  @section('content')
-      <section class="vh-100 gradient-custom">
-          <div class="container py-5 h-100">
-              <div class="row justify-content-center align-items-center h-100">
-                  <div class="col-12 col-lg-9 col-xl-7">
-                      <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                          <div class="card-body p-4 p-md-5">
-                              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                              <form action="{{ route('registro.add') }}" method="Post">
-                                  @csrf
-                                  <div class="row">
-                                      <div class="col-md-6 mb-4">
-
-                                          <div data-mdb-input-init class="form-outline">
-                                              <input type="text" id="name" name="name"
-                                                  class="form-control form-control-lg" />
-                                              <label class="form-label" for="firstName">Nombres</label>
-                                              @error('name')
-                                                  <small class="text-danger mt-1">
-                                                      <strong>{{ $message }}</strong>
-                                                  </small>
-                                              @enderror
-                                          </div>
-
-                                      </div>
-                                      <div class="col-md-6 mb-4">
-
-                                          <div data-mdb-input-init class="form-outline">
-                                              <input type="email" id="email" name="email"
-                                                  class="form-control form-control-lg" />
-                                              <label class="form-label" for="emailAddress">Email</label>
-                                              @error('email')
-                                                  <small class="text-danger mt-1">
-                                                      <strong>{{ $message }}</strong>
-                                                  </small>
-                                              @enderror
-                                          </div>
-
-                                      </div>
-                                  </div>
-
-                                  <div class="row">
-                                      <div class="col-md-6 mb-4">
-
-                                          <div data-mdb-input-init class="form-outline">
-                                              <input type="text" id="password" name="password"
-                                                  class="form-control form-control-lg" />
-                                              <label class="form-label" for="firstName">Contraseña</label>
-                                              @error('password')
-                                                  <small class="text-danger mt-1">
-                                                      <strong>{{ $message }}</strong>
-                                                  </small>
-                                              @enderror
-                                          </div>
-
-                                      </div>
-                                      <div class="col-md-6 mb-4">
-
-                                          <div data-mdb-input-init class="form-outline">
-                                              <input type="text" id="password_confirmation" name="password_confirmation"
-                                                  class="form-control form-control-lg" />
-                                              <label class="form-label" for="lastName">Confirmar Contraseña</label>
-                                              @error('password_confirmation')
-                                                  <small class="text-danger mt-1">
-                                                      <strong>{{ $message }}</strong>
-                                                  </small>
-                                              @enderror
-                                          </div>
-
-                                      </div>
-                                  </div>
+@extends('layouts.login')
+<h1>Register</h1>
+@section('content')
+    <section class="vh-100 gradient-custom">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
 
 
-                                  <div class="row">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('registro.add') }}">
+                            @csrf
 
-                                      <div class="col-md-6 mb-4 pb-2">
+                            <div class="row mb-3">
+                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
-                                          <div data-mdb-input-init class="form-outline">
-                                              <input type="text" id="idrol" name="idrol"
-                                                  class="form-control form-control-lg" />
-                                              <label class="form-label" for="phoneNumber">Rol</label>
-                                              @error('rol')
-                                                  <small class="text-danger mt-1">
-                                                      <strong>{{ $message }}</strong>
-                                                  </small>
-                                              @enderror
-                                          </div>
+                                <div class="col-md-6">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                      </div>
-                                  </div>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="new-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password-confirm"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password_conf" type="password" class="form-control" name="password_conf"
+                                        required autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
 
 
+                                    <input data-mdb-ripple-init class="btn btn-primary btn-block btn-lg shadow-lg mt-5"
+                                        type="submit" value="Register" />
 
-                                  <div class="mt-4 pt-2">
-                                      <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit"
-                                          value="Submit" />
-                                  </div>
-
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-  @endsection
+                                    <a class="btn btn-info  btn-block btn-lg shadow-lg mt-5" href="{{ route('authe') }}"
+                                        role="button">Regresar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
